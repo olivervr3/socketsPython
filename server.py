@@ -1,7 +1,6 @@
 import socket 
 import threading
-import PIL
-from PIL import Image
+import os
 
 
 HEADER = 64
@@ -26,22 +25,15 @@ def handle_client(conn, addr):
         else:
             print(f" He recibido del cliente [{addr}] la imagen: {msg}")
             if msg == "PENGU":
-                im = Image.open(r"/home/ovr3/Desktop/Include/images/PENGU.jpg")
-                im.show()
-                conn.send(f"ENHORABUENA! Se ha abierto la imagen {msg} en el servidor.".encode(FORMAT))
+                conn.send(os.getcwd().encode(FORMAT)+r"/images/PENGU.jpg".encode(FORMAT))
             elif msg == "UA":
-                im = Image.open(r"/home/ovr3/Desktop/Include/images/UA.jpg")
-                im.show()
-                conn.send(f"ENHORABUENA! Se ha abierto la imagen {msg} en el servidor.".encode(FORMAT))
+                conn.send(os.getcwd().encode(FORMAT)+r"/images/UA.jpg".encode(FORMAT))
             elif msg == "PYTHON":
-                im = Image.open(r"/home/ovr3/Desktop/Include/images/PYTHON.jpg")
-                im.show()
-                conn.send(f"ENHORABUENA! Se ha abierto la imagen {msg} en el servidor.".encode(FORMAT))
+                conn.send(os.getcwd().encode(FORMAT)+r"/images/PYTHON.jpg".encode(FORMAT))
             else:
                 conn.send(f"Imagen {msg} no existe pruebe otravez o salir escribiendo FIN.".encode(FORMAT))
     print("ADIOS. TE ESPERO EN OTRA OCASION")
     conn.close()
-    server.close()
     
         
 

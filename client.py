@@ -1,5 +1,7 @@
 import socket
 import sys
+import PIL
+from PIL import Image
 
 HEADER = 64
 PORT = 8010
@@ -28,9 +30,9 @@ if (len(sys.argv) == 3):
     while msg != FIN:
         print("Envio al servidor: ", msg)
         send(msg)
-        print("Recibo del Servidor: ", client.recv(2048).decode(FORMAT))
+        im = Image.open(client.recv(2048).decode(FORMAT))
+        im.show()
         msg = input()
-
     print("SE ACABO LO QUE SE DABA")
     print("Envio al servidor: ", FIN)
     send(FIN)
